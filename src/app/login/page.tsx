@@ -1,10 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { loginUser, registerUser } from "@/app/actions/auth";
+import { useUserStore } from "@/store/user-store";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
+
+  const router = useRouter();
+  const setUser = useUserStore((state) => state.setUser);
+
+  async function handleLogin(formData: FormData) {
+    console.log("Form data received:", formData);
+    const user = await loginUser(formData);
+    setUser(user);
+    router.push("/dashboard");
+  }
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-zinc-950 px-4">
@@ -21,7 +33,10 @@ export default function AuthPage() {
           </p>
         </div>
 
-        <form action={isLogin ? loginUser : registerUser} className="space-y-5">
+        <form
+          action={isLogin ? handleLogin : registerUser}
+          className="space-y-5"
+        >
           {!isLogin && (
             <>
               <div>

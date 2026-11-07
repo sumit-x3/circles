@@ -34,7 +34,10 @@ export async function loginUser(formData: FormData) {
 
   if (!isValid) throw new Error("Invalid credentials");
 
-  redirect("/dashboard");
-
-  return user;
+  return {
+    id: user.id,
+    name: user.name,
+    username: user.username,
+    email: user.email,
+  };
 }
