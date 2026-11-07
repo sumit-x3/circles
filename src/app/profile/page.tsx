@@ -39,7 +39,7 @@ export default async function ProfilePage() {
         <section className="flex items-start justify-between gap-10">
           <div className="flex items-start gap-8">
             <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-[#272522] text-4xl text-[#b7a5d8]">
-              {user.name.charAt(0).toUpperCase()}
+              {user.name?.charAt(0).toUpperCase() ?? "U"}
             </div>
 
             <div>
