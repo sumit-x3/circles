@@ -85,7 +85,7 @@ export async function logoutUser() {
 
   cookieStore.delete("accessToken");
 
-  redirect("/auth");
+  redirect("/login");
 }
 
 export async function testing() {
