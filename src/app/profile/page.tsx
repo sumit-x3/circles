@@ -1,9 +1,12 @@
 import Link from "next/link";
-import { getCurrentUser } from "@/app/actions/auth";
+import { getCurrentUser, testing } from "@/app/actions/auth";
 import { redirect } from "next/navigation";
+import { getCurrentUserId } from "@/lib/user";
 
 export default async function ProfilePage() {
-  const user = await getCurrentUser();
+  const userId = await getCurrentUserId();
+  const user = await getCurrentUser(userId?.id ?? 0);
+  await testing();
 
   if (!user) redirect("/login");
 

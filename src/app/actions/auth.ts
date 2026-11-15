@@ -62,20 +62,11 @@ export async function loginUser(formData: FormData) {
 }
 
 // Get Current User -------------------------------------------
-export async function getCurrentUser() {
-  "use cache: private";
-  const cookieStore = await cookies();
-
-  const token = cookieStore.get("accessToken")?.value;
-
-  if (!token) return null;
-
-  const payload = await verifyToken(token);
-
-  if (!payload) return null;
+export async function getCurrentUser(userId: number) {
+  "use cache";
 
   const user = await db.orm.public.User.where({
-    id: payload.userId,
+    id: userId,
   }).first();
   console.log("fetching current user");
   if (!user) return null;
@@ -95,4 +86,11 @@ export async function logoutUser() {
   cookieStore.delete("accessToken");
 
   redirect("/auth");
+}
+
+export async function testing() {
+  "use cache";
+  const date = new Date();
+  console.log("testing", date.toISOString());
+  return date.toISOString();
 }
