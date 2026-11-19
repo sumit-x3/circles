@@ -3,7 +3,7 @@
 import { db } from "@/prisma/db";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
-import { signToken, verifyToken } from "@/lib/auth";
+import { signToken } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 // Register ----------------------------------------------------
@@ -86,11 +86,4 @@ export async function logoutUser() {
   cookieStore.delete("accessToken");
 
   redirect("/login");
-}
-
-export async function testing() {
-  "use cache";
-  const date = new Date();
-  console.log("testing", date.toISOString());
-  return date.toISOString();
 }
