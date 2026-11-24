@@ -104,7 +104,7 @@ export async function loginUser(
 
   // Redirect to dashboard
 
-  redirect("/dashboard");
+  redirect("/discover");
 }
 
 // Get Current User -------------------------------------------

@@ -15,7 +15,7 @@ export async function proxy(request: NextRequest) {
 
   // Redirect authenticated users away from auth page
   if (pathname === "/login" && isAuthenticated) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return NextResponse.redirect(new URL("/discover", request.url));
   }
 
   return NextResponse.next();
