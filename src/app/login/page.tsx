@@ -1,22 +1,27 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { loginUser, registerUser } from "@/app/actions/auth";
-import { useUserStore } from "@/store/user-store";
+import { useActionState } from "react";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
+  const initialState = {
+    message: "",
+    user: null,
+  };
 
-  const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
+  // Login action state
+  const [loginState, loginAction, loginPending] = useActionState(
+    loginUser,
+    initialState,
+  );
 
-  async function handleLogin(formData: FormData) {
-    console.log("Form data received:", formData);
-    const user = await loginUser(formData);
-    setUser(user);
-    router.push("/dashboard");
-  }
+  // Register action state
+  const [registerState, registerAction, registerPending] = useActionState(
+    registerUser,
+    initialState,
+  );
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-zinc-950 px-4">
@@ -34,7 +39,7 @@ export default function AuthPage() {
         </div>
 
         <form
-          action={isLogin ? handleLogin : registerUser}
+          action={isLogin ? loginAction : registerAction}
           className="space-y-5"
         >
           {!isLogin && (
@@ -91,11 +96,15 @@ export default function AuthPage() {
               placeholder="••••••••"
               className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-white outline-none focus:border-zinc-400"
             />
+            <p className="mt-2 text-sm text-red-500" aria-live="polite">
+              {isLogin ? loginState.message : registerState.message}
+            </p>
           </div>
 
           <button
             type="submit"
-            className="w-full rounded-lg bg-white py-3 font-semibold text-black transition hover:bg-zinc-200"
+            disabled={isLogin ? loginPending : registerPending}
+            className="w-full rounded-lg bg-white py-3 font-semibold text-black transition hover:bg-zinc-200 *:disabled:cursor-not-allowed disabled:bg-zinc-600 disabled:text-zinc-400"
           >
             {isLogin ? "Login" : "Sign Up"}
           </button>
