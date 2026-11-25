@@ -15,7 +15,7 @@ export default function AboutPage() {
             Home
           </Link>
           <Link
-            href="/auth"
+            href="/login"
             className="rounded-full bg-[#f4f0e8] px-5 py-3 font-medium text-black"
           >
             Join Circles
@@ -127,7 +127,7 @@ export default function AboutPage() {
         <p className="mt-6 text-zinc-400">Bring your moments along.</p>
 
         <Link
-          href="/auth"
+          href="/login"
           className="mt-10 inline-flex rounded-full bg-[#f4f0e8] px-7 py-4 font-semibold text-black transition hover:bg-white"
         >
           Find your circle →

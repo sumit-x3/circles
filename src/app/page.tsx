@@ -44,7 +44,7 @@ export default function HomePage() {
           </Link>
 
           <Link
-            href="/dashboard"
+            href="/discover"
             className="rounded-full bg-[#f4f0e8] px-5 py-3 font-medium text-black transition hover:bg-white"
           >
             Get started
@@ -72,14 +72,14 @@ export default function HomePage() {
 
           <div className="mt-10 flex items-center gap-6">
             <Link
-              href="/auth"
+              href="/login"
               className="rounded-full bg-[#f4f0e8] px-6 py-4 text-sm font-semibold text-black transition hover:scale-[1.02]"
             >
               Join Circles <span className="ml-2">→</span>
             </Link>
 
             <Link
-              href="#about"
+              href="/about"
               className="text-sm text-zinc-400 underline underline-offset-4 transition hover:text-white"
             >
               Learn more
